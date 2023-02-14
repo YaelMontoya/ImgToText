@@ -49,6 +49,16 @@ def cambiar_ruta():
     label_ruta.config(text="Ruta actual: " + ruta)
     ventana.update()
 
+def guardar_texto():
+    try:
+        archivo = filedialog.asksaveasfile(mode="w", defaultextension=".txt", filetypes=[("Todos los archivos", "*.*"), ("Archivos de texto", "*.txt")])
+        if archivo is not None:
+            archivo.write(texto.get("1.0", END))
+            archivo.close()
+    except:
+        texto.insert(INSERT, "Error: Se produjo un error al guardar el archivo.")
+
+
 
 
 # Crear ventana
@@ -86,5 +96,9 @@ boton_copiar.pack(pady=15)
 # Crear un botón para borrar texto
 boton_borrar = Button(frame, text="Borrar texto", command=borrar_texto, font=("Arial", 14))
 boton_borrar.pack(pady=15)
+
+# Crear un botón para guardar el texto
+boton_guardar = Button(frame, text="Guardar texto", command=guardar_texto, font=("Arial", 14))
+boton_guardar.pack(pady=15)
 
 ventana.mainloop()
